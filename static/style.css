@@ -76,6 +76,15 @@ a:active {
   border: 1px solid var(--ctp-macchiato-red);
 }
 
+.fa-arrows-rotate {
+  color: var(--ctp-macchiato-blue);
+  transition: var(--transition-speed) ease-out;
+}
+
+.fa-arrows-rotate:hover {
+  transform: rotate(180deg);
+}
+
 @media only screen and (max-width: 600px) {
   .content {
     justify-content: flex-start;
