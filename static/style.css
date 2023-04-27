@@ -82,7 +82,7 @@ a:active {
 }
 
 .fa-arrows-rotate:hover {
-  transform: rotate(180deg);
+  transform: rotate(180deg) scale(1.5);
 }
 
 @media only screen and (max-width: 600px) {
