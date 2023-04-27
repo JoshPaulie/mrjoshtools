@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Mr. Josh's Web Tools!{% endblock %} {% block content %}
+
+<div class="text-box">
+  <span class="accent-text">{{ days_left }}</span> days 
+</div>
+<div class="text-box">
+  <span class="accent-text">{{ hours_left }}</span> hours</li>
+</div>
+<div class="about-days">
+  <p>until summer break! <a href="{{ url_for('summer') }}"><i class="fa-solid fa-arrows-rotate"></i></a></p>
+</div>
+
+{% endblock %}
