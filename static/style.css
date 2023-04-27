@@ -66,8 +66,16 @@ a:active {
   color: inherit;
 }
 
+.tool-button {
+  border: 1px solid var(--ctp-macchiato-blue);
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.tool-button:hover {
+  border: 1px solid var(--ctp-macchiato-red);
+}
+
 @media only screen and (max-width: 600px) {
   .content {
     justify-content: flex-start;
