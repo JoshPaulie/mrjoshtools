@@ -85,6 +85,12 @@ a:active {
   transform: rotate(180deg) scale(1.5);
 }
 
+.days-left-emojis {
+  max-width: 75%;
+  text-align: center;
+  font-size: 3rem;
+}
+
 @media only screen and (max-width: 600px) {
   .content {
     justify-content: flex-start;
