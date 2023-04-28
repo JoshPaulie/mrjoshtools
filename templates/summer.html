@@ -2,10 +2,8 @@
 
 <div class="text-box"><span class="accent-text">{{ days_left }}</span> days</div>
 <div class="text-box"><span class="accent-text">{{ hours_left }}</span> hours</div>
-<div class="about-days">
-  <p>
-    until summer break! <a href="{{ url_for('summer') }}"><i class="fa-solid fa-arrows-rotate"></i></a>
-  </p>
-</div>
+<p class="about-days">
+  until summer break! <a href="{{ url_for('summer') }}"><i class="fa-solid fa-arrows-rotate"></i></a>
+</p>
 <div class="days-left-emojis">{{ '☀️' * days_left }}</div>
 {% endblock %}
