@@ -38,6 +38,11 @@ body {
   background-color: var(--ctp-macchiato-base);
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .content {
   /* Flex box */
   display: flex;
@@ -89,6 +94,11 @@ a:active {
   max-width: 75%;
   text-align: center;
   font-size: 3rem;
+}
+
+.about-days {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 @media only screen and (max-width: 600px) {
