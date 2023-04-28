@@ -43,6 +43,32 @@ body {
   margin: 0;
 }
 
+p {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+label {
+  text-align: center;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+progress {
+  width: 100%;
+}
+
+progress::-webkit-progress-bar,
+progress::-moz-progress-bar {
+  background-color: var(--ctp-macchiato-green);
+}
+
 .content {
   /* Flex box */
   display: flex;
@@ -61,14 +87,6 @@ body {
 
 .text-box {
   font-size: 3rem;
-}
-
-a,
-a:hover,
-a:focus,
-a:active {
-  text-decoration: none;
-  color: inherit;
 }
 
 .tool-button {
@@ -94,6 +112,8 @@ a:active {
   max-width: 75%;
   text-align: center;
   font-size: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .about-days {
@@ -101,7 +121,20 @@ a:active {
   padding-bottom: 1rem;
 }
 
+.today-completed {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 25%;
+}
+
+.today-completed-percent {
+  text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
+  .today-completed {
+    width: 75%;
+  }
   .content {
     justify-content: flex-start;
     padding-top: 1rem;
