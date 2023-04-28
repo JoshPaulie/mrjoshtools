@@ -46,6 +46,19 @@ def calc_hours_left_in_contract() -> int:
     return (calc_workdays_left_in_contract() * shift_len) - hours_worked_today
 
 
+def workday_completed() -> float:
+    now = dt.datetime.now()
+    start_time = now.replace(hour=9, minute=0, second=0, microsecond=0)
+    end_time = now.replace(hour=16, minute=0, second=0, microsecond=0)
+    shift_duration = end_time - start_time
+
+    time_left = end_time - now
+    shift_completed = shift_duration - time_left
+    shift_completed_percent = (shift_completed / shift_duration) * 100
+    return shift_completed_percent
+
+
 if __name__ == "__main__":
     hr_left = calc_hours_left_in_contract()
     print(f"Hours left in '22-'23 contract: {hr_left}")
+    print(workday_completed())
