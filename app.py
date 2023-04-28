@@ -25,4 +25,5 @@ def summer():
         # fyi - boomers get mad if you include the last day, so -1
         days_left=calc.calc_workdays_left_in_contract() - 1,
         hours_left=calc.calc_hours_left_in_contract(),
+        workday_completed=calc.workday_completed(),
     )
