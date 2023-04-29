@@ -38,6 +38,8 @@ def calc_workdays_left_in_contract() -> int:
     days = [today + dt.timedelta(n) for n in range(days_left)]
     days = [day for day in days if not is_weekend(day)]  # No weekends!
     workdays_remaining = len(days)
+    if now.time() > shift_start_time:
+        workdays_remaining -= 1
     return workdays_remaining
 
 
