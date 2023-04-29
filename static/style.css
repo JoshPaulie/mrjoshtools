@@ -132,6 +132,9 @@ progress::-moz-progress-bar {
 }
 
 @media only screen and (max-width: 600px) {
+  .days-left-emojis {
+    display: none;
+  }
   .today-completed {
     width: 75%;
   }
