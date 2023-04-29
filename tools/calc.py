@@ -57,7 +57,8 @@ def workday_completed() -> float:
     time_left = end_time - now
     shift_completed = shift_duration - time_left
     shift_completed_percent = (shift_completed / shift_duration) * 100
-    return shift_completed_percent
+    # Because the tool can be used before & after work hours, the returned value must be clamped between 1 - 100
+    return sorted([0, shift_completed_percent, 100])[1]
 
 
 if __name__ == "__main__":
