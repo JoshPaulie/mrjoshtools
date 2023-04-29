@@ -45,6 +45,10 @@ def calc_workdays_left_in_contract() -> int:
 
 def calc_hours_left_in_contract() -> int:
     """Calculate "workhours" left in contract, today & last day inclusive"""
+    # if used, say on a Sunday afternoon, then again the following monday,
+    # the user would be surprised to see 7 hours added on. this covers that
+    if is_weekend(now.date()):
+        return calc_workdays_left_in_contract() * shift_len
     return (calc_workdays_left_in_contract() * shift_len) - hours_worked_today
 
 
