@@ -31,7 +31,7 @@ def days_until_summerbreak(now: dt.datetime) -> int:
     return (last_day - now.date()).days + 1
 
 
-def workdays_remaining(now: dt.datetime) -> int:
+def contract_workdays_remaining(now: dt.datetime) -> int:
     """Calculate workdays left in contract. Today & last workday inclusive"""
     days_left = days_until_summerbreak(now.now())
     days = [now.date() + dt.timedelta(n) for n in range(days_left)]
@@ -40,7 +40,7 @@ def workdays_remaining(now: dt.datetime) -> int:
     return workdays_remaining
 
 
-def workdays_until_summer(now: dt.datetime) -> int:
+def schooldays_until_summer(now: dt.datetime) -> int:
     """Similar to workdays_remaining() but with logic that would make more sense to my coworkers"""
     workdays_until_summer = workdays_remaining(now.now())
     workdays_until_summer -= 1  # 'Take off' the last day
@@ -51,7 +51,7 @@ def workdays_until_summer(now: dt.datetime) -> int:
     return workdays_until_summer
 
 
-def workhours_remaining(now: dt.datetime) -> int:
+def contract_workhours_remaining(now: dt.datetime) -> int:
     """Workhours remaining in contract. Today & last day inclusive"""
     # if used, say on a Sunday afternoon, then again the following monday,
     # the user would be surprised to see 7 hours added on. this covers that

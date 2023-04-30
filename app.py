@@ -24,7 +24,7 @@ def summer():
     now = dt.datetime.now()
     return render_template(
         "summer.html",
-        days_left=calc.workdays_until_summer(now),
-        hours_left=calc.workhours_remaining(now),
+        days_left=calc.schooldays_until_summer(now),
+        hours_left=calc.contract_workhours_remaining(now),
         workday_completed=calc.workday_completed(now),
     )
