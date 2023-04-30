@@ -28,7 +28,7 @@ def hours_worked_today(now: dt.datetime) -> int:
 
 def contract_workdays_remaining(now: dt.datetime) -> int:
     """Calculate workdays left in contract. Today & last workday inclusive"""
-    days_left = days_until_summerbreak(now.now())
+    days_left = (last_day - now.date()).days + 1
     days = [now.date() + dt.timedelta(n) for n in range(days_left)]
     days = [day for day in days if not is_weekend(day)]  # No weekends!
     workdays_remaining = len(days)
