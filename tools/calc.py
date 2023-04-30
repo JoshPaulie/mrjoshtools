@@ -13,16 +13,16 @@ def is_weekend(date: dt.date) -> bool:
 
 
 def hours_worked_today(now: dt.datetime) -> int:
-    # fyi - keeps tool from breaking if checked before work hours
-    if now.time() < shift_start_time:
+    # if checked before the workday has started, then no hours and have been worked
+    # same logic for checking over the weekend
+    if now.time() < shift_start_time or is_weekend(now.date()):
         return 0
 
     shift_start = dt.datetime.combine(now.date(), shift_start_time)
     hours_since_shift_start = (now - shift_start).seconds / 60 / 60
 
-    # fyi - bc the tool might be used *after* work hours, this value caps at 7
+    # bc the tool might be used *after* work hours, this value caps at 7
     hours_worked_today = round(hours_since_shift_start) if hours_since_shift_start < shift_len else shift_len
-
     return hours_worked_today
 
 
@@ -35,23 +35,8 @@ def contract_workdays_remaining(now: dt.datetime) -> int:
     return workdays_remaining
 
 
-def schooldays_until_summer(now: dt.datetime) -> int:
-    """Similar to workdays_remaining() but with logic that would make more sense to my coworkers"""
-    workdays_until_summer = contract_workdays_remaining(now.now())
-    workdays_until_summer -= 1  # 'Take off' the last day
-    # If the work day is over, and it's not a weekend, take 1 off
-    # Gives cute effect of a day going down after 4
-    if now.time() > shift_end_time and not is_weekend(now.date()):
-        return workdays_until_summer - 1
-    return workdays_until_summer
-
-
 def contract_workhours_remaining(now: dt.datetime) -> int:
     """Workhours remaining in contract. Today & last day inclusive"""
-    # if used, say on a Sunday evening, then again the following morning,
-    # the user would be surprised to see 7 hours added on. this covers that
-    if is_weekend(now.date()):
-        return contract_workdays_remaining(now.now()) * shift_len
     return (contract_workdays_remaining(now.now()) * shift_len) - hours_worked_today(now.now())
 
 
@@ -60,8 +45,9 @@ def workday_completed(now: dt.datetime) -> float:
     If the current date is a weekend, or if called before workhours, the function returns 0.
 
     Note:
-    - I intentionally made a separate function for this feature
-    - hours_worked_today() always returns an int, but a float is more appropriate for here"""
+    - This code was copied in from another script, too lazy to refactor it right now
+    - hours_worked_today() always returns an int, but a float is more appropriate for here
+    """
     now = now.now()
     if is_weekend(now.date()):
         return 0
@@ -80,7 +66,6 @@ def workday_completed(now: dt.datetime) -> float:
 if __name__ == "__main__":
     now = dt.datetime.now()
     print(f"{contract_workdays_remaining(now)=}")
-    print(f"{schooldays_until_summer(now)=}")
     print(f"{hours_worked_today(now)=}")
     print(f"{contract_workhours_remaining(now)=}")
     print(f"{workday_completed(now)=}")
