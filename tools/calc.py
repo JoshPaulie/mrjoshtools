@@ -35,6 +35,9 @@ def days_until_summerbreak() -> int:
     return (last_day - today).days + 1
 
 
+def workdays_remaining() -> int:
+    """Calculate workdays left in contract. Today & last workday inclusive"""
+    days_left = days_until_summerbreak()
     days = [today + dt.timedelta(n) for n in range(days_left)]
     days = [day for day in days if not is_weekend(day)]  # No weekends!
     workdays_remaining = len(days)
