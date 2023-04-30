@@ -30,9 +30,11 @@ def is_weekend(date: dt.date) -> bool:
     return date.weekday() in [5, 6]
 
 
-def calc_workdays_left_in_contract() -> int:
-    """Calculate workdays left in contract, today & last day inclusive"""
-    days_left = calc_days()
+def days_until_summerbreak() -> int:
+    """Find days between today -> last day in the contract. Today & weekends inclusive"""
+    return (last_day - today).days + 1
+
+
     days = [today + dt.timedelta(n) for n in range(days_left)]
     days = [day for day in days if not is_weekend(day)]  # No weekends!
     workdays_remaining = len(days)
