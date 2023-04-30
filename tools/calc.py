@@ -55,11 +55,13 @@ def workdays_until_summer() -> int:
     return workdays_until_summer
 
 
+def workhours_remaining() -> int:
+    """Workhours remaining in contract. Today & last day inclusive"""
     # if used, say on a Sunday afternoon, then again the following monday,
     # the user would be surprised to see 7 hours added on. this covers that
     if is_weekend(now.date()):
-        return calc_workdays_left_in_contract() * shift_len
-    return (calc_workdays_left_in_contract() * shift_len) - hours_worked_today
+        return workdays_remaining() * shift_len
+    return (workdays_remaining() * shift_len) - hours_worked_today()
 
 
 def workday_completed() -> float:
