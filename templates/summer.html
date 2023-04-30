@@ -3,7 +3,7 @@
 <div class="text-box"><span class="accent-text">{{ days_left }}</span> days</div>
 <div class="text-box"><span class="accent-text">{{ hours_left }}</span> hours</div>
 <p class="about-days">
-  until summer break! <a href="{{ url_for('summer') }}"><i class="fa-solid fa-arrows-rotate"></i></a>
+  until summer break! {{ ['😌', '🏖️', '😎'] | random }} <a href="{{ url_for('summer') }}"><i class="fa-solid fa-arrows-rotate"></i></a>
 </p>
 <div class="days-left-emojis">{{ '☀️' * days_left }}</div>
 {% if workday_completed != 0 %}
