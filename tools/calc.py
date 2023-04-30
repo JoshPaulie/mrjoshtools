@@ -85,6 +85,9 @@ def workday_completed() -> float:
 
 
 if __name__ == "__main__":
-    hr_left = calc_hours_left_in_contract()
-    print(f"Hours left in '22-'23 contract: {hr_left}")
-    print(workday_completed())
+    print(f"{days_until_summerbreak()=}")
+    print(f"{workdays_remaining()=}")
+    print(f"{workdays_until_summer()=}")
+    print(f"{hours_worked_today()=}")
+    print(f"{workhours_remaining()=}")
+    print(f"{workday_completed()=}")
