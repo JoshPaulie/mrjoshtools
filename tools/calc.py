@@ -65,7 +65,14 @@ def workhours_remaining() -> int:
 
 
 def workday_completed() -> float:
+    """Calculates the percentage of a workday that has been completed.
+    If the current date is a weekend, or if called before workhours, the function returns 0."""
+    # We need to make another for this scope, as to not change the global
     now = dt.datetime.now()
+
+    if is_weekend(now.date()):
+        return 0
+
     start_time = now.replace(hour=9, minute=0, second=0, microsecond=0)
     end_time = now.replace(hour=16, minute=0, second=0, microsecond=0)
     shift_duration = end_time - start_time
