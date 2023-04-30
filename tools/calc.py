@@ -26,11 +26,6 @@ def hours_worked_today(now: dt.datetime) -> int:
     return hours_worked_today
 
 
-def days_until_summerbreak(now: dt.datetime) -> int:
-    """Find days between today -> last day in the contract. Today & weekends inclusive"""
-    return (last_day - now.date()).days + 1
-
-
 def contract_workdays_remaining(now: dt.datetime) -> int:
     """Calculate workdays left in contract. Today & last workday inclusive"""
     days_left = days_until_summerbreak(now.now())
@@ -81,7 +76,6 @@ def workday_completed(now: dt.datetime) -> float:
 
 if __name__ == "__main__":
     now = dt.datetime.now()
-    print(f"{days_until_summerbreak(now)=}")
     print(f"{workdays_remaining(now)=}")
     print(f"{workdays_until_summer(now)=}")
     print(f"{hours_worked_today(now)=}")
