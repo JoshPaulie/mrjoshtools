@@ -7,7 +7,8 @@ today = now.date().today()
 # Static contract info
 last_day = dt.date(2023, 5, 23)
 shift_start_time = dt.time(9, 0, 0)
-shift_len = 7
+shift_end_time = dt.time(16, 0, 0)
+shift_len = shift_end_time.hour - shift_start_time.hour
 
 # Hours worked today
 shift_start = dt.datetime.combine(today, shift_start_time)
