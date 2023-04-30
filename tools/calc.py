@@ -48,7 +48,7 @@ def schooldays_until_summer(now: dt.datetime) -> int:
 
 def contract_workhours_remaining(now: dt.datetime) -> int:
     """Workhours remaining in contract. Today & last day inclusive"""
-    # if used, say on a Sunday afternoon, then again the following monday,
+    # if used, say on a Sunday evening, then again the following morning,
     # the user would be surprised to see 7 hours added on. this covers that
     if is_weekend(now.date()):
         return contract_workdays_remaining(now.now()) * shift_len
@@ -57,8 +57,11 @@ def contract_workhours_remaining(now: dt.datetime) -> int:
 
 def workday_completed(now: dt.datetime) -> float:
     """Calculates the percentage of a workday that has been completed.
-    If the current date is a weekend, or if called before workhours, the function returns 0."""
-    # We need to make another for this scope, as to not change the global
+    If the current date is a weekend, or if called before workhours, the function returns 0.
+
+    Note:
+    - I intentionally made a separate function for this feature
+    - hours_worked_today() always returns an int, but a float is more appropriate for here"""
     now = now.now()
     if is_weekend(now.date()):
         return 0
