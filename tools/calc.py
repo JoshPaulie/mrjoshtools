@@ -41,13 +41,20 @@ def workdays_remaining() -> int:
     days = [today + dt.timedelta(n) for n in range(days_left)]
     days = [day for day in days if not is_weekend(day)]  # No weekends!
     workdays_remaining = len(days)
-    if now.time() > shift_start_time:
-        workdays_remaining -= 1
     return workdays_remaining
 
 
-def calc_hours_left_in_contract() -> int:
-    """Calculate "workhours" left in contract, today & last day inclusive"""
+def workdays_until_summer() -> int:
+    """Similar to workdays_remaining() but with logic that would make more sense to my coworkers"""
+    workdays_until_summer = workdays_remaining()
+    workdays_until_summer -= 1  # 'Take off' the last day
+    # If the work day is over, and it's not a weekend, take 1 off
+    # Gives cute effect of a day going down after 4
+    if now.time() > shift_end_time and not is_weekend(now.date()):
+        return workdays_until_summer - 1
+    return workdays_until_summer
+
+
     # if used, say on a Sunday afternoon, then again the following monday,
     # the user would be surprised to see 7 hours added on. this covers that
     if is_weekend(now.date()):
