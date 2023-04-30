@@ -1,3 +1,4 @@
+import datetime as dt
 import os
 import time
 
@@ -20,9 +21,10 @@ def index():
 
 @app.route("/summer/")
 def summer():
+    now = dt.datetime.now()
     return render_template(
         "summer.html",
-        days_left=calc.workdays_until_summer(),
-        hours_left=calc.workhours_remaining(),
-        workday_completed=calc.workday_completed(),
+        days_left=calc.workdays_until_summer(now),
+        hours_left=calc.workhours_remaining(now),
+        workday_completed=calc.workday_completed(now),
     )

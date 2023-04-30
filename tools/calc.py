@@ -1,9 +1,5 @@
 import datetime as dt
 
-# Now && today
-now = dt.datetime.now()
-today = now.date().today()
-
 # Static contract info
 last_day = dt.date(2023, 5, 23)
 shift_start_time = dt.time(9, 0, 0)
@@ -12,12 +8,12 @@ shift_len = shift_end_time.hour - shift_start_time.hour
 
 
 # Functions 🧠
-def hours_worked_today():
+def hours_worked_today(now: dt.datetime):
     # fyi - keeps tool from breaking if checked before work hours
     if now.time() < shift_start_time:
         return 0
 
-    shift_start = dt.datetime.combine(today, shift_start_time)
+    shift_start = dt.datetime.combine(now.date(), shift_start_time)
     hours_since_shift_start = (now - shift_start).seconds / 60 / 60
 
     # fyi - bc the tool might be used *after* work hours, this value caps at 7
@@ -30,23 +26,23 @@ def is_weekend(date: dt.date) -> bool:
     return date.weekday() in [5, 6]
 
 
-def days_until_summerbreak() -> int:
+def days_until_summerbreak(now: dt.datetime) -> int:
     """Find days between today -> last day in the contract. Today & weekends inclusive"""
-    return (last_day - today).days + 1
+    return (last_day - now.date()).days + 1
 
 
-def workdays_remaining() -> int:
+def workdays_remaining(now: dt.datetime) -> int:
     """Calculate workdays left in contract. Today & last workday inclusive"""
-    days_left = days_until_summerbreak()
-    days = [today + dt.timedelta(n) for n in range(days_left)]
+    days_left = days_until_summerbreak(now.now())
+    days = [now.date() + dt.timedelta(n) for n in range(days_left)]
     days = [day for day in days if not is_weekend(day)]  # No weekends!
     workdays_remaining = len(days)
     return workdays_remaining
 
 
-def workdays_until_summer() -> int:
+def workdays_until_summer(now: dt.datetime) -> int:
     """Similar to workdays_remaining() but with logic that would make more sense to my coworkers"""
-    workdays_until_summer = workdays_remaining()
+    workdays_until_summer = workdays_remaining(now.now())
     workdays_until_summer -= 1  # 'Take off' the last day
     # If the work day is over, and it's not a weekend, take 1 off
     # Gives cute effect of a day going down after 4
@@ -55,21 +51,20 @@ def workdays_until_summer() -> int:
     return workdays_until_summer
 
 
-def workhours_remaining() -> int:
+def workhours_remaining(now: dt.datetime) -> int:
     """Workhours remaining in contract. Today & last day inclusive"""
     # if used, say on a Sunday afternoon, then again the following monday,
     # the user would be surprised to see 7 hours added on. this covers that
     if is_weekend(now.date()):
-        return workdays_remaining() * shift_len
-    return (workdays_remaining() * shift_len) - hours_worked_today()
+        return workdays_remaining(now.now()) * shift_len
+    return (workdays_remaining(now.now()) * shift_len) - hours_worked_today(now.now())
 
 
-def workday_completed() -> float:
+def workday_completed(now: dt.datetime) -> float:
     """Calculates the percentage of a workday that has been completed.
     If the current date is a weekend, or if called before workhours, the function returns 0."""
     # We need to make another for this scope, as to not change the global
-    now = dt.datetime.now()
-
+    now = now.now()
     if is_weekend(now.date()):
         return 0
 
@@ -85,9 +80,10 @@ def workday_completed() -> float:
 
 
 if __name__ == "__main__":
-    print(f"{days_until_summerbreak()=}")
-    print(f"{workdays_remaining()=}")
-    print(f"{workdays_until_summer()=}")
-    print(f"{hours_worked_today()=}")
-    print(f"{workhours_remaining()=}")
-    print(f"{workday_completed()=}")
+    now = dt.datetime.now()
+    print(f"{days_until_summerbreak(now)=}")
+    print(f"{workdays_remaining(now)=}")
+    print(f"{workdays_until_summer(now)=}")
+    print(f"{hours_worked_today(now)=}")
+    print(f"{workhours_remaining(now)=}")
+    print(f"{workday_completed(now)=}")
