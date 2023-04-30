@@ -8,7 +8,11 @@ shift_len = shift_end_time.hour - shift_start_time.hour
 
 
 # Functions 🧠
-def hours_worked_today(now: dt.datetime):
+def is_weekend(date: dt.date) -> bool:
+    return date.weekday() in [5, 6]
+
+
+def hours_worked_today(now: dt.datetime) -> int:
     # fyi - keeps tool from breaking if checked before work hours
     if now.time() < shift_start_time:
         return 0
@@ -20,10 +24,6 @@ def hours_worked_today(now: dt.datetime):
     hours_worked_today = round(hours_since_shift_start) if hours_since_shift_start < shift_len else shift_len
 
     return hours_worked_today
-
-
-def is_weekend(date: dt.date) -> bool:
-    return date.weekday() in [5, 6]
 
 
 def days_until_summerbreak(now: dt.datetime) -> int:
