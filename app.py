@@ -22,8 +22,7 @@ def index():
 def summer():
     return render_template(
         "summer.html",
-        # fyi - boomers get mad if you include the last day, so -1
-        days_left=calc.calc_workdays_left_in_contract() - 1,
-        hours_left=calc.calc_hours_left_in_contract(),
+        days_left=calc.workdays_until_summer(),
+        hours_left=calc.workhours_remaining(),
         workday_completed=calc.workday_completed(),
     )
