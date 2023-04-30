@@ -37,7 +37,7 @@ def contract_workdays_remaining(now: dt.datetime) -> int:
 
 def schooldays_until_summer(now: dt.datetime) -> int:
     """Similar to workdays_remaining() but with logic that would make more sense to my coworkers"""
-    workdays_until_summer = workdays_remaining(now.now())
+    workdays_until_summer = contract_workdays_remaining(now.now())
     workdays_until_summer -= 1  # 'Take off' the last day
     # If the work day is over, and it's not a weekend, take 1 off
     # Gives cute effect of a day going down after 4
@@ -51,8 +51,8 @@ def contract_workhours_remaining(now: dt.datetime) -> int:
     # if used, say on a Sunday afternoon, then again the following monday,
     # the user would be surprised to see 7 hours added on. this covers that
     if is_weekend(now.date()):
-        return workdays_remaining(now.now()) * shift_len
-    return (workdays_remaining(now.now()) * shift_len) - hours_worked_today(now.now())
+        return contract_workdays_remaining(now.now()) * shift_len
+    return (contract_workdays_remaining(now.now()) * shift_len) - hours_worked_today(now.now())
 
 
 def workday_completed(now: dt.datetime) -> float:
@@ -76,8 +76,8 @@ def workday_completed(now: dt.datetime) -> float:
 
 if __name__ == "__main__":
     now = dt.datetime.now()
-    print(f"{workdays_remaining(now)=}")
-    print(f"{workdays_until_summer(now)=}")
+    print(f"{contract_workdays_remaining(now)=}")
+    print(f"{schooldays_until_summer(now)=}")
     print(f"{hours_worked_today(now)=}")
-    print(f"{workhours_remaining(now)=}")
+    print(f"{contract_workhours_remaining(now)=}")
     print(f"{workday_completed(now)=}")
