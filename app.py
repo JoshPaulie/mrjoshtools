@@ -22,7 +22,6 @@ def index():
 @app.route("/summer/")
 def summer():
     now = dt.datetime.now()
-    now = now.replace(month=5, day=1, hour=10, minute=0)
     return render_template(
         "summer.html",
         # My coworkers don't include the current day when counting down
