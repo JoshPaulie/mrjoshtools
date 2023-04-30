@@ -6,6 +6,7 @@
   until summer break! <a href="{{ url_for('summer') }}"><i class="fa-solid fa-arrows-rotate"></i></a>
 </p>
 <div class="days-left-emojis">{{ '☀️' * days_left }}</div>
+{% if workday_completed != 0 %}
 <div class="today-completed">
   <label for="today-completed-prog">Schoolday compelted:</label>
   <br />
@@ -13,4 +14,4 @@
   <br />
   <p class="today-completed-percent">{{ (workday_completed)|round(2) }}%</p>
 </div>
-{% endblock %}
+{% endif %} {% endblock %}
