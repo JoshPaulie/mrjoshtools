@@ -1,4 +1,5 @@
 import datetime as dt
+import math
 
 # Static contract info
 last_day = dt.date(2023, 5, 23)
@@ -22,8 +23,7 @@ def hours_worked_today(now: dt.datetime) -> int:
     hours_since_shift_start = (now - shift_start_dt).seconds / 60 / 60
 
     # bc the tool might be used *after* work hours, this value caps at 7
-    hours_worked_today = round(hours_since_shift_start) if hours_since_shift_start < shift_len else shift_len
-    return hours_worked_today
+    return min(math.ceil(hours_since_shift_start), shift_len)
 
 
 def contract_workdays_remaining(now: dt.datetime) -> int:
