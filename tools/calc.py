@@ -18,8 +18,8 @@ def hours_worked_today(now: dt.datetime) -> int:
     if now.time() < shift_start_time or is_weekend(now.date()):
         return 0
 
-    shift_start = dt.datetime.combine(now.date(), shift_start_time)
-    hours_since_shift_start = (now - shift_start).seconds / 60 / 60
+    shift_start_dt = dt.datetime.combine(now.date(), shift_start_time)
+    hours_since_shift_start = (now - shift_start_dt).seconds / 60 / 60
 
     # bc the tool might be used *after* work hours, this value caps at 7
     hours_worked_today = round(hours_since_shift_start) if hours_since_shift_start < shift_len else shift_len
